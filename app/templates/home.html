@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Review list</title>
+	<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+    	table {
+  		border-collapse: collapse;
+  		border-spacing: 0;
+  		width: 100%;
+			}
+		{% if not staff %}
+		body {
+			margin-top: 40px;
+			margin-bottom: 75px;
+		}
+		{% endif %}	
+		#footer {
+			position: fixed;
+			height: 75px;
+			line-height: 75px;
+			left: 0px;
+			right: 0px;
+			margin-bottom: 0px;
+			bottom: 0px;
+			text-align: center;
+			background-color: black;
+		}
+		p {
+			color: white;
+		}
+		
+		#accounttoggle {
+			position: fixed;
+			height: 40px;
+			line-height: 40px;
+			left: 0px;
+			right: 0px;
+			margin-top: 0px;
+			top: 0px;
+			text-align: center;
+			background-color: black;
+			border-bottom: 1px dashed white;
+		}
+    </style>
+</head>
+<body>
+<!-- Flash message -->
+{% with messages = get_flashed_messages() %}  
+    {% if messages %}  
+        {% for message in messages %}  
+            <p>{{ message }}</p> 
+        {% endfor %}  
+    {% endif %}  
+{% endwith %}  
+
+<!-- Office staff use -->
+{% if not staff %}
+<a href="{{url_for('login')}}">
+<div id="accounttoggle">
+	<p><b>Office</b></p>
+</div>
+</a>
+{% endif %}
+
+<!-- Table -->  
+<div style="overflow-x:auto;">   
+  <table class="table">
+    <thead style="background-color: black;color: white;">
+      <tr>
+      	{% if staff %}
+      	<th></th>
+      	{% endif %}
+        <th>Room</th>
+        <th>Name</th>
+        <th>Ad. no.</th>
+        <th>Review</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for review in reviews %}
+      <tr>
+      	{% if staff %}
+      	<td>
+      		<form action="{{url_for('reviewdelete', id=review.id)}}" method="POST">
+      			<input value="Done" type="submit" style="background-color: green;color: white;border-color: green;">
+      		</form>
+      	</td>
+      	{% endif %}
+        <td>{{review.roomnumber}}</td>
+        <td>{{review.name}}</td>
+        <td>{{review.admissionnumber}}</td>
+        <td>{{review.review}}</td>
+      </tr>
+    {% endfor %}  
+    </tbody>
+  </table>   
+</div>   
+<!-- <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>  --> 
+{% if not staff %}
+<a href="{{url_for('review')}}">
+<div id="footer">
+	<p><b>Add review</b></p>
+</div>
+</a>
+{% endif %}
+<script>
+	function openurl(argument) {
+		window.open("{{url_for('review')}}")
+	}
+</script>
+</body>
+</html>

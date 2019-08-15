@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review entry</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{url_for('static', filename='css/contactus.css')}}">
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Raleway:300);
+@import url(https://fonts.googleapis.com/css?family=Lusitana:400,700);
+    </style>
+</head>
+
+<body>
+  <form action="{{url_for('session')}}" method="GET">
+    <input style="background-color: black;color: white;font-family: Lusitana, serif;cursor: pointer;border: none;height: 40px;" type="submit" value="< Back">
+  </form>
+  <section class="get-in-touch">
+   <h1 class="title">Login</h1>
+   <form action="" class="contact-form row" method="POST">
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <p class="flashes"><strong>{{ messages[-1] }}</strong></p>
+            {% endif %}
+        {% endwith %}
+      <div class="form-field col x-50">
+         <input id="name" class="input-text js-input" name="username" type="text" required>
+         <label class="label" for="username">Username</label>
+      </div>
+      <div class="form-field col x-50">
+         <input id="occupation" class="input-text js-input" name="password" type="text" required>
+         <label class="label" for="password">Password</label>
+      </div>
+      <div class="form-field col x-100 align-center">
+         <input class="submit-btn" type="submit" value="Submit">
+      </div>
+   </form>
+</section>
+<p class="note">Created by <a class="link" href="https://www.instagram.com/shravankumar_shetty/" target="blank">Shravan Shetty</a>.</p>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  
+
+    <script  src="{{url_for('static', filename='js/contactus.js')}}"></script>
+
+
+
+
+</body>
+
+</html>
