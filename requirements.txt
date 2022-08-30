@@ -21,7 +21,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 Mako==1.0.10
 MarkupSafe==1.1.1
-mod-wsgi==4.6.7
+mod-wsgi==4.9.3
 monotonic==1.5
 protobuf==3.8.0
 psycopg2-binary==2.8.3
